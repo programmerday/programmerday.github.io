@@ -15,7 +15,7 @@ export const Header = () => {
         </div>
         <div className={styles.parts}>
             <div className={styles.part}>سوالات</div>
-            <div className={styles.part}>جدول امتیازات</div>
+            <div className={styles.part} onClick={()=> window.location.href = "/RankingTable"}>جدول امتیازات</div>
         </div>
     </div>
     <div className={styles.left}>
