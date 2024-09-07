@@ -1,4 +1,11 @@
-import { Piano, Typing , Login, QuestionPool , Question, RankingTable} from "../pages";
+import {
+  Piano,
+  Typing,
+  Login,
+  QuestionPool,
+  Question,
+  ScoreBoard,
+} from "../pages";
 
 const routes = [
   {
@@ -7,31 +14,30 @@ const routes = [
     Private: false,
   },
   {
-    path: "/Landing",
+    path: "/questions",
     component: QuestionPool,
     Private: false,
   },
   {
-    path: "/Question/*",
+    path: "/question/:id",
     component: Question,
-    Private: false,
+    Private: true,
   },
   {
-    path: "/Piano",
+    path: "/piano",
     component: Piano,
-    Private: false,
+    Private: true,
   },
   {
-    path: "/TypingTest",
+    path: "/typing",
     component: Typing,
-    Private: false,
+    Private: true,
   },
   {
-    path: "/RankingTable",
-    component: RankingTable,
-    Private: false,
+    path: "/score-board",
+    component: ScoreBoard,
+    Private: true,
   },
 ];
-  
-  export default routes;
-  
+
+export default routes;

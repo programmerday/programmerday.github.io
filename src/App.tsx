@@ -1,4 +1,4 @@
-import {AppRouter} from "./router/Router"
+import { AppRouter } from "./router/Router";
 
 const App = () => {
   // const text =
@@ -9,7 +9,7 @@ const App = () => {
   const text2 = "یک روز معذرت از سوی کارکنان بله و دست اندر کاران ما";
 
   return (
-    <div>
+    <div className="app">
       <AppRouter />
     </div>
   );

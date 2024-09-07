@@ -1,6 +1,6 @@
 import styles from "./Login.module.scss";
-import user from "../../../assets/images/user-svgrepo-com.png";
-import key from "../../../assets/images/key-svgrepo-com.svg";
+import user from "~/assets/images/user-svgrepo-com.png";
+import key from "~/assets/images/key-svgrepo-com.svg";
 
 export const Login = () => {
   const HandleClick = () =>{
