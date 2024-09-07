@@ -3,6 +3,9 @@ import user from "../../../assets/images/user-svgrepo-com.png";
 import key from "../../../assets/images/key-svgrepo-com.svg";
 
 export const Login = () => {
+  const HandleClick = () =>{
+    window.location.href = "/Landing";
+  }
   return <div className={styles.Login} dir="rtl">
     <div className={styles.Container}>
       <div className={styles.Header}>
@@ -26,7 +29,7 @@ export const Login = () => {
 
         </div>
         <div className={styles.button}>
-          <span className={styles.submitText}>ورود</span>
+          <span className={styles.submitText} onClick={()=>HandleClick()}>ورود</span>
         </div>
       </div>
     </div>

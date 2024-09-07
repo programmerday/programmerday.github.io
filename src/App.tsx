@@ -1,4 +1,4 @@
-import { Piano, Typing , Login, QuestionPool , Question} from "./pages";
+import {AppRouter} from "./router/Router"
 
 const App = () => {
   // const text =
@@ -10,7 +10,7 @@ const App = () => {
 
   return (
     <div>
-      <Piano />
+      <AppRouter />
     </div>
   );
 };
