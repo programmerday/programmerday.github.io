@@ -7,19 +7,19 @@ import {
   ScoreBoard,
 } from "../pages";
 
-const routes = [
+const routes = (isLoggedIn: boolean) => [
   {
-    path: "/",
+    path: isLoggedIn ? "/login" : "/",
     component: Login,
     Private: false,
   },
   {
-    path: "/questions",
+    path: isLoggedIn ? "/" : "/questions",
     component: QuestionPool,
     Private: false,
   },
   {
-    path: "/question/:id",
+    path: ":id",
     component: Question,
     Private: true,
   },

@@ -1,6 +1,6 @@
 .ScoreBoard {
   width: 100vw;
-  height: 110vh;
+  height: 100vh;
 
   background-image: linear-gradient(90deg, #000000b4 0%, #000000b4 100%),
     url("../../assets/images/image.jpeg");
@@ -8,8 +8,8 @@
   font-family: "";
 }
 .body {
-  height: max-content;
-  padding: 5% 24%;
+  height: 85vh;
+  padding: 5% 20%;
   flex-grow: 0;
   display: flex;
   flex-direction: column;

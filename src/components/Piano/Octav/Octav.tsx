@@ -4,13 +4,13 @@ import styles from "./Octav.module.scss";
 import { notes } from "~/utils";
 
 export interface OctavProps {
-  octavNumber: 2 | 5;
+  octavNumber: 2 | 3;
   showClavieNumber?: boolean;
 }
 
 export const Octav: FC<OctavProps> = (props) => {
   return (
-    <div className={styles.Octav}>
+    <div className={styles.Octav} style={{ direction: "ltr" }}>
       <Clavier
         note={notes[0]}
         octavNumber={props.octavNumber}

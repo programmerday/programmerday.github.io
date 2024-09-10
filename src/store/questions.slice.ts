@@ -3,6 +3,7 @@ import { Question } from "~/types";
 import {
   getAllQuestion,
   getOneQusetion,
+  purchaseQusetion,
   sendQuestionResult,
 } from "./questions.actions";
 
@@ -31,5 +32,6 @@ export const questionActions = {
   getAllQuestion,
   getOneQusetion,
   sendQuestionResult,
+  purchaseQusetion,
 };
 export const questionReducer = questionSlice.reducer;

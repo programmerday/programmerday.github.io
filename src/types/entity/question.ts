@@ -1,13 +1,22 @@
 export interface Question {
-  id: number;
-  isSolved: boolean;
-  isOpen: boolean;
+  id: string;
+  cost: number;
+  isActive: boolean;
+  isAnswerd: boolean;
+  isPurchased: boolean;
+  isStarred: boolean;
+  score: boolean;
 }
 
 export interface QuestionInfo {
   title: string;
-  description: string;
+  text: string;
+  isStarred: boolean;
+  score: number;
+  isActive: boolean;
+  isAnswerd: boolean;
+  isPurchased: boolean;
   assetsUrl: string[];
   level: number;
-  type: string;
+  cost: number;
 }

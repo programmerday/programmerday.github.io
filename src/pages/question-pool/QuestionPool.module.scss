@@ -7,16 +7,22 @@
   background-size: cover;
   font-family: "";
 }
+
+.Questions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0;
+}
+
 .body {
-  height: max-content;
-  flex-grow: 0;
+  width: 80%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
-  padding: 5% 24%;
 }
 .inner {
   width: 1044px;

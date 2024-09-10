@@ -1,49 +1,43 @@
-export const baseUrl = "";
+import axios from "axios";
 
-export const POST_CONFIG = (user_token) => {
-  return {
+export const baseUrl = "http://188.121.122.87:80";
+
+export const API_LOGIN = "/login";
+export const API_REGISTER = "/api/user/register/";
+
+export const API_GET_ALL_QUESTION = "/all-questions";
+export const API_GET_ONE_QUESTION = `/question-details`;
+
+export const API_GET_SCOREBOARD = "/ranking";
+
+export const API_GET_PROFILE = "/group-info";
+
+export const API_PURCHASE_QUESTION = "/purchase-question";
+
+export const AxiosInstance = axios.create({
+  baseURL: baseUrl,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+export const GetAxiosInstance = (user_token: string) => {
+  return axios.create({
+    baseURL: baseUrl,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `GroupID ${user_token}`,
+    },
+  });
+};
+
+export const PostAxiosInstance = (user_token: string) => {
+  return axios.create({
+    baseURL: baseUrl,
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Token ${user_token}`,
+      Authorization: `GroupID ${user_token}`,
     },
-  };
+  });
 };
-
-// export const POST_CONFIG_FILE = (user_token) => {
-//   return {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "multipart/form-data",
-//       Authorization: `Token ${user_token}`,
-//     },
-//   };
-// };
-
-export const GET_CONFIG = (user_token, params) => {
-  return {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Token ${user_token}`,
-    },
-    params,
-  };
-};
-
-export const PATCH_CONFIG = (user_token) => {
-  return {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Token ${user_token}`,
-    },
-  };
-};
-
-export const API_LOGIN = baseUrl + "/api/user/login/";
-export const API_REGISTER = baseUrl + "/api/user/register/";
-
-export const API_GET_ALL_QUESTION = baseUrl + "/api/questions";
-export const API_GET_ONE_QUESTION = (id: number) =>
-  baseUrl + `/api/questions/${id}`;

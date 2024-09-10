@@ -11,9 +11,13 @@ export const Loading = () => {
           <div
             className={styles.Loading}
             style={{ "--i": index } as React.CSSProperties}
+            key={index}
           >
             {spanArray.map((_, index) => (
-              <span style={{ "--j": index } as React.CSSProperties} />
+              <span
+                style={{ "--j": index } as React.CSSProperties}
+                key={index}
+              />
             ))}
           </div>
         );

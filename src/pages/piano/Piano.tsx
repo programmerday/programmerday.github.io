@@ -21,8 +21,8 @@ export const Piano = () => {
 
   return (
     <div className={styles.Piano}>
+      <Octav octavNumber={3} showClavieNumber />
       <Octav octavNumber={2} />
-      <Octav octavNumber={5} showClavieNumber />
     </div>
   );
 };

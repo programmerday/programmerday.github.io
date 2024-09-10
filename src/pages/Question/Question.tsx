@@ -11,7 +11,7 @@ import { Header } from "~/components/Header/Header";
 import fullStar from "~/assets/images/پر.png";
 import emptyStar from "~/assets/images/خالی.png";
 import image from "~/assets/images/روز برنامه نویس.png";
-import { QuestionInfo } from "~/types";
+import { Question as QuestionType, QuestionInfo } from "~/types";
 import { questionActions } from "~/store/questions.slice";
 import { Loading } from "~/components";
 
@@ -20,22 +20,38 @@ export const Question = () => {
   const { id } = useParams();
   const [questionInfo, setQuestionInfo] = useState<QuestionInfo | null>(null);
   const [result, setResult] = useState<string>("");
+  const [question, setQuestion] = useState<QuestionType | null>(null);
+  const { token } = useSelector((state: RootState) => state.auth);
 
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    const question = questions.find((_, index) => index === +(id ?? 0));
+    const question = questions.find((_, index) => index + 1 === +id!);
 
+    console.log(question);
     if (question?.id) {
+      setQuestion(question);
       const cb = (questionInfo: QuestionInfo) => setQuestionInfo(questionInfo);
-      dispatch(questionActions.getOneQusetion({ id: question.id, cb }));
+      dispatch(
+        questionActions.getOneQusetion({
+          id: question.id,
+          cb,
+          user_token: token,
+        })
+      );
     }
   }, [questions, id]);
 
   const handleSubmit = () => {
     const cb = () => {};
     if (id) {
-      dispatch(questionActions.sendQuestionResult({ id: +id, result, cb }));
+      dispatch(
+        questionActions.sendQuestionResult({
+          id: question?.id ?? "1",
+          result,
+          cb,
+        })
+      );
     }
   };
 
@@ -78,16 +94,14 @@ export const Question = () => {
                   <div className={styles.category}>
                     <span className={styles.categoryText}>سوال </span>
                     <span className={styles.greenText}>
-                      {questionInfo.type}
+                      {questionInfo.isStarred ? "طلایی" : "عادی"}
                     </span>
                   </div>
                 </div>
               </div>
               <div className={styles.Line} />
             </div>
-            <span className={styles.QuestionText}>
-              {questionInfo?.description}
-            </span>
+            <span className={styles.QuestionText}>{questionInfo?.text}</span>
             <div className={styles.assets}>
               <div className={styles.assetBox}>
                 <img className={styles.assetImg} src={image} alt="" />

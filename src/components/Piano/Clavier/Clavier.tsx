@@ -2,12 +2,11 @@ import { FC } from "react";
 import styles from "./Clavier.module.scss";
 import clsx from "clsx";
 import { Note } from "~/utils";
-// import sharp from "../../../";
 
 export interface ClavierProps {
   isBlack?: boolean;
   note: Note;
-  octavNumber: 2 | 5;
+  octavNumber: 2 | 3;
   noteNumber: number;
   showClavieNumber?: boolean;
 }

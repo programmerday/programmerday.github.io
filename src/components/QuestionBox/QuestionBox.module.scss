@@ -1,15 +1,16 @@
-.ْQuestionBox {
+.QuestionBox {
   width: 90px;
   height: 90px;
-  flex-grow: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: stretch;
+  align-items: center;
   gap: 10px;
   padding: 19px 16px;
   border-radius: 16px;
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   background-color: rgba(217, 217, 217, 0.3);
+  cursor: pointer;
+  font-size: 1.5rem;
 }
