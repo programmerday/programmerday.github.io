@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const baseUrl = "http://188.121.122.87:80";
+export const baseUrl = "http://188.121.122.87:5000";
 
 export const API_LOGIN = "/login";
 export const API_REGISTER = "/api/user/register/";

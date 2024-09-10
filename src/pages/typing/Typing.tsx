@@ -4,6 +4,7 @@ import { FC, HTMLAttributes, useEffect, useRef, useState } from "react";
 
 export interface TypingProps extends HTMLAttributes<HTMLDivElement> {
   text: string;
+  description: string;
   onSuccess?: (time: number, accuracy: number) => void;
 }
 
@@ -17,6 +18,7 @@ export const Typing: FC<TypingProps> = (props) => {
 
   const timeRef = useRef<number>(0);
   const renderOneRef = useRef(true);
+  const [timer, setTimer] = useState<number>(0);
 
   useEffect(() => {
     const handleKeyDown = (e: any) => {
@@ -33,6 +35,17 @@ export const Typing: FC<TypingProps> = (props) => {
     window.addEventListener("keydown", handleKeyDown);
 
     return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  useEffect(() => {
+    setInterval(
+      () =>
+        setTimer((prev) => {
+          const newTime = (prev + 0.01).toFixed;
+          return newTime;
+        }),
+      10
+    );
   }, []);
 
   useEffect(() => {
@@ -67,7 +80,17 @@ export const Typing: FC<TypingProps> = (props) => {
   }, [lastLetterEntered]);
 
   return (
-    <div className={styles.Typing}>
+    <div className={styles.Typing} {...props}>
+      <div className={styles.Info}>
+        {props.description}
+        <div style={{ width: "50px", height: "100%" }}></div>
+        wrongs:{" "}
+        {wrongs.map((wrong) => (
+          <span>{wrong},</span>
+        ))}
+        <div style={{ width: "50px", height: "100%" }}></div>
+        time: {timer}
+      </div>
       <div className={styles.TextWanted}>
         {props.text.split("").map((letter, index) => {
           return (

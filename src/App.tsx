@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Piano } from "./pages";
+import { Piano, Typing } from "./pages";
 import { AppRouter } from "./router/Router";
 import {
   API_CREATE_GROUP,
@@ -19,12 +19,17 @@ import "react-toastify/dist/ReactToastify.css";
 import { notificationActions } from "./store/notification-slice";
 
 const App = () => {
-  // const text =
-  // "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore maiores animi quam tempora voluptate porro, laboriosam odit voluptatum accusamus quisquam nobis dolor pariatur quia dicta eos dolorem facere quod! Aliquam molestias, cupiditate optio amet id corrupti molestiae ducimus numquam fugit ipsum vitae? Necessitatibus nulla ratione soluta exercitationem corrupti consequatur quidem.".toLocaleLowerCase();
+  const text =
+    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore maiores animi quam tempora voluptate porro, laboriosam odit voluptatum accusamus quisquam nobis dolor pariatur quia dicta eos dolorem facere quod! Aliquam molestias, cupiditate optio amet id corrupti molestiae ducimus numquam fugit ipsum vitae? Necessitatibus nulla ratione soluta exercitationem corrupti consequatur quidem.".toLocaleLowerCase();
   const shortText =
     "Lorem ipsum dolor sit amet consectetur,".toLocaleLowerCase();
 
   const text2 = "یک روز معذرت از سوی کارکنان بله و دست اندر کاران ما";
+
+  const description2 =
+    "اگه بتونی سریع تر تایپ کنی یعنی بیشتر میتونی برنامه نویسی کنی :))";
+
+  const description1 = "if you can fast typing then u can write more programm";
 
   const { isLoggedIn, token } = useSelector((state: RootState) => state.auth);
 
@@ -75,7 +80,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <AppRouter />
+      {/* <AppRouter /> */}
 
       <ToastContainer
         position="bottom-right"
@@ -89,7 +94,11 @@ const App = () => {
         className="toast"
         theme={"light"}
       />
-      {/* <Piano /> */}
+      <Typing
+        text={text}
+        description={description1}
+        style={{ direction: "ltr" }}
+      />
     </div>
   );
 };

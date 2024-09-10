@@ -16,7 +16,7 @@ import { questionActions } from "~/store/questions.slice";
 import { Loading } from "~/components";
 import clsx from "clsx";
 import { getDir } from "~/utils";
-import { GetAxiosInstance } from "~/api/configApi";
+import { baseUrl, GetAxiosInstance } from "~/api/configApi";
 
 export const Question = () => {
   const { questions } = useSelector((state: RootState) => state.questions);
@@ -137,7 +137,7 @@ export const Question = () => {
               {questionInfo.has_zip && (
                 <div className={styles.assetBox}>
                   <a
-                    href={`http://188.121.122.87:80/${questionInfo.zip_file_url}`}
+                    href={`${baseUrl}/${questionInfo.zip_file_url}`}
                     className={styles.assetZip}
                     dir="ltr"
                     target="_blank"
