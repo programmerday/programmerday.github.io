@@ -9,6 +9,8 @@ import { Loading, QuestionBox } from "~/components";
 export const QuestionPool = () => {
   const { questions } = useSelector((state: RootState) => state.questions);
 
+  console.log(questions);
+
   return (
     <div className={styles.QuestionPool}>
       <Header />

@@ -15,20 +15,25 @@ import { Loading } from "~/components";
 import { useEffect } from "react";
 import { scoreBoardActions } from "~/store/score-board.slice";
 import { fetchMoreThanUThink } from "~/utils";
+import clsx from "clsx";
 
 export const ScoreBoard = () => {
   const { teams } = useSelector((state: RootState) => state.scoreBoard);
+  const { token } = useSelector((state: RootState) => state.auth);
 
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    fetchMoreThanUThink(() => dispatch(scoreBoardActions.getAllTeams()), 10000);
+    fetchMoreThanUThink(
+      () => dispatch(scoreBoardActions.getAllTeams(token)),
+      10000
+    );
   }, []);
 
   return (
     <div className={styles.ScoreBoard}>
       <Header />
-      {teams.length < 3 ? (
+      {teams.length < 2 ? (
         <Loading />
       ) : (
         <div className={styles.body}>
@@ -90,7 +95,9 @@ export const ScoreBoard = () => {
             </div>
             <div className={styles.ranks}>
               {teams.map((team, index) => (
-                <div className={styles.rankBox}>
+                <div
+                  className={clsx(styles.rankBox, { [styles.Self]: team.self })}
+                >
                   <div className={styles.inside}>
                     <div className={styles.part}>
                       <span
@@ -102,7 +109,7 @@ export const ScoreBoard = () => {
                       <img className={styles.dimond} src={star} alt="" />
                     </div>
                     <span className={styles.text}>{team.name}</span>
-                    <span className={styles.text}>{index}</span>
+                    <span className={styles.text}>{index + 1}</span>
                   </div>
                 </div>
               ))}

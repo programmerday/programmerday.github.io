@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { AppDispatch, RootState } from "~/store";
 
@@ -14,6 +14,9 @@ import image from "~/assets/images/روز برنامه نویس.png";
 import { Question as QuestionType, QuestionInfo } from "~/types";
 import { questionActions } from "~/store/questions.slice";
 import { Loading } from "~/components";
+import clsx from "clsx";
+import { getDir } from "~/utils";
+import { GetAxiosInstance } from "~/api/configApi";
 
 export const Question = () => {
   const { questions } = useSelector((state: RootState) => state.questions);
@@ -25,10 +28,10 @@ export const Question = () => {
 
   const dispatch = useDispatch<AppDispatch>();
 
+  const navigate = useNavigate();
   useEffect(() => {
     const question = questions.find((_, index) => index + 1 === +id!);
 
-    console.log(question);
     if (question?.id) {
       setQuestion(question);
       const cb = (questionInfo: QuestionInfo) => setQuestionInfo(questionInfo);
@@ -43,16 +46,32 @@ export const Question = () => {
   }, [questions, id]);
 
   const handleSubmit = () => {
-    const cb = () => {};
-    if (id) {
+    const cb = () => navigate("/score-board");
+    if (id && result.trim().length !== 0) {
       dispatch(
         questionActions.sendQuestionResult({
           id: question?.id ?? "1",
           result,
           cb,
+          user_token: token,
+          point: question?.score ?? 100,
         })
       );
     }
+  };
+
+  const convertTextToValidText = (text?: string) => {
+    if (!text) return { text: "", links: [] };
+    const linkAndText = text.split(";;");
+    let links: string[] | string | [] =
+      linkAndText.length === 2 ? linkAndText[0] : [];
+    const validText =
+      linkAndText.length === 2 ? linkAndText[1] : linkAndText[0];
+
+    if (links.length > 0) {
+      links = (links as string).split(",");
+    }
+    return { text: validText, links: links as string[] };
   };
 
   const handleChangeResult = (e: ChangeEvent<HTMLInputElement>) => {
@@ -60,6 +79,8 @@ export const Question = () => {
 
     setResult(value);
   };
+
+  const { text, links } = convertTextToValidText(questionInfo?.text);
 
   return (
     <div className={styles.Question} dir="rtl">
@@ -82,6 +103,7 @@ export const Question = () => {
                         .fill(0)
                         .map((_, index) => (
                           <img
+                            key={index}
                             src={
                               index > questionInfo.level ? emptyStar : fullStar
                             }
@@ -101,30 +123,49 @@ export const Question = () => {
               </div>
               <div className={styles.Line} />
             </div>
-            <span className={styles.QuestionText}>{questionInfo?.text}</span>
+            <span className={styles.QuestionText}>{text}</span>
             <div className={styles.assets}>
-              <div className={styles.assetBox}>
-                <img className={styles.assetImg} src={image} alt="" />
-                <span className={styles.assetText}>fileName.png</span>
-              </div>
-              <div className={styles.assetBox}>
-                <img className={styles.assetImg} src={image} alt="" />
-                <span className={styles.assetText}>fileName.png</span>
-              </div>
+              {links.length > 0 &&
+                links.map((link) => (
+                  <div className={styles.assetBox} key={link}>
+                    <img className={styles.assetImg} src={link} alt="" />
+                    <span className={styles.assetText}>
+                      {link.split("//")[1].split(".")[0]}
+                    </span>
+                  </div>
+                ))}
+              {questionInfo.has_zip && (
+                <div className={styles.assetBox}>
+                  <a
+                    href={`http://188.121.122.87:80/${questionInfo.zip_file_url}`}
+                    className={styles.assetZip}
+                    dir="ltr"
+                    target="_blank"
+                  >
+                    File Zip!
+                  </a>
+                </div>
+              )}
             </div>
-            <div className={styles.SubmitBar}>
-              <input
-                className={styles.SubmitBox}
-                type="text"
-                placeholder="پاسخ خود را وارد کنید"
-                onChange={handleChangeResult}
-              />
-              <div className={styles.Submit}>
-                <button className={styles.SubmitTxt} onClick={handleSubmit}>
-                  ثبت
-                </button>
+            {!question?.isAnswerd && (
+              <div className={styles.SubmitBar}>
+                <input
+                  className={styles.SubmitBox}
+                  type="text"
+                  placeholder="پاسخ خود را وارد کنید"
+                  onChange={handleChangeResult}
+                  style={{ direction: result ? getDir(result) : "rtl" }}
+                />
+                <div>
+                  <button
+                    className={clsx(styles.Submit, styles.SubmitTxt)}
+                    onClick={handleSubmit}
+                  >
+                    ثبت
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       )}

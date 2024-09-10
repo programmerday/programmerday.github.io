@@ -24,14 +24,20 @@ const profileSlice = createSlice({
   name: "profile",
   initialState,
   reducers: {
-    setProfile(
-      state,
-      action: PayloadAction<{ keys: number; score: number }>
-    ) {
+    setProfile(state, action: PayloadAction<{ keys: number; score: number }>) {
       const { keys, score } = action.payload;
 
       state.keys = keys;
       state.score = score;
+    },
+    setKeys(state, action: PayloadAction<number>) {
+      state.keys = action.payload;
+    },
+    setScore(state, action: PayloadAction<number>) {
+      state.score = action.payload;
+    },
+    updateScore(state, action: PayloadAction<number>) {
+      state.score += action.payload;
     },
   },
 });

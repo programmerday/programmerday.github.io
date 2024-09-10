@@ -24,6 +24,18 @@ const questionSlice = createSlice({
       );
       state.questions[questionIndex] = question;
     },
+    updateParamQuestion(state, action: PayloadAction<Partial<Question>>) {
+      const question = action.payload;
+
+      const questionIndex = state.questions.findIndex(
+        (questionIn) => questionIn.id === question.id
+      );
+
+      state.questions[questionIndex] = {
+        ...state.questions[questionIndex],
+        ...question,
+      };
+    },
   },
 });
 

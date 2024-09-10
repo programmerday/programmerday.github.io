@@ -1,7 +1,9 @@
 .ScoreBoard {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
 
+  direction: ltr;
   background-image: linear-gradient(90deg, #000000b4 0%, #000000b4 100%),
     url("../../assets/images/image.jpeg");
   background-size: cover;
@@ -110,7 +112,6 @@
   height: 46px;
   align-self: stretch;
   flex-grow: 0;
-  font-family: Peyda;
   font-size: 36px;
   font-weight: bold;
   font-stretch: normal;
@@ -135,7 +136,6 @@
   width: 74px;
   height: 56px;
   flex-grow: 0;
-  font-family: PeydaFaNum;
   font-size: 36px;
   font-weight: bold;
   font-stretch: normal;
@@ -180,7 +180,6 @@
   width: 205px;
   height: 51px;
   flex-grow: 0;
-  font-family: Peyda;
   font-size: 24px;
   font-weight: bold;
   font-stretch: normal;
@@ -222,6 +221,10 @@
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   background-color: rgba(217, 217, 217, 0.3);
+
+  &.Self {
+    background-color: #0cbc8d88;
+  }
 }
 .inside {
   height: 51px;
@@ -235,9 +238,7 @@
 }
 .text {
   width: 205px;
-  height: 40px;
   flex-grow: 0;
-  font-family: PeydaFaNum;
   font-size: 24px;
   font-weight: Medium;
   font-stretch: normal;

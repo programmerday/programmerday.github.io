@@ -5,7 +5,7 @@ export interface Question {
   isAnswerd: boolean;
   isPurchased: boolean;
   isStarred: boolean;
-  score: boolean;
+  score: number;
 }
 
 export interface QuestionInfo {
@@ -16,7 +16,8 @@ export interface QuestionInfo {
   isActive: boolean;
   isAnswerd: boolean;
   isPurchased: boolean;
-  assetsUrl: string[];
+  zip_file_url: string;
+  has_zip: string;
   level: number;
   cost: number;
 }

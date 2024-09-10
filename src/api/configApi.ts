@@ -7,12 +7,16 @@ export const API_REGISTER = "/api/user/register/";
 
 export const API_GET_ALL_QUESTION = "/all-questions";
 export const API_GET_ONE_QUESTION = `/question-details`;
+export const API_SEND_ANSWER = `/submit`;
 
 export const API_GET_SCOREBOARD = "/ranking";
 
 export const API_GET_PROFILE = "/group-info";
 
 export const API_PURCHASE_QUESTION = "/purchase-question";
+
+export const API_CREATE_GROUP = "/new-group";
+export const API_CREATE_Question = "/new-question";
 
 export const AxiosInstance = axios.create({
   baseURL: baseUrl,
